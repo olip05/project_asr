@@ -1,0 +1,1001 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+
+\usepackage{iftex}
+
+\usepackage[
+	colorinlistoftodos,%
+	% disable,
+	color=thillux-grey!35,%
+	bordercolor=thillux-grey,%
+	linecolor=thillux-grey%
+]{todonotes}
+
+\ifxetex
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=Common}
+%\setmainfont{Source Serif Pro}
+%\setmonofont[Scale=MatchLowercase]{Source Code Pro}
+%\setsansfont[Scale=MatchLowercase]{Source Sans Pro}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{unicode-math}
+%\setmathfont[Ligatures=TeX]{Latin Modern Math}
+\else
+\ifluatex
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=Common}
+%\setmainfont{Source Serif Pro}
+%\setmonofont[Scale=MatchLowercase]{Source Code Pro}
+%\setsansfont[Scale=MatchLowercase]{Source Sans Pro}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{unicode-math}
+%\setmathfont[Ligatures=TeX]{Latin Modern Math}
+\else
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\fi
+\fi
+
+\usepackage{mathtools}
+\usepackage{amsthm}
+
+\usepackage{siunitx}
+
+\usepackage[english]{babel}
+\usepackage{enumitem}
+
+\usepackage{bm}
+\usepackage[nice]{nicefrac}     % schräge Bruchstriche
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+\floatname{algorithm}{Algorithm}
+\renewcommand{\listalgorithmname}{List of algorithms}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[hidelinks]{hyperref}
+\usepackage{bookmark}                           % Einstellungen für hyperref
+\usepackage{booktabs}                           % nice tables
+\usepackage[hang,flushmargin]{footmisc}         % schönere Fußzeile
+\usepackage{graphicx}                           % Einbinden von Abbildungen
+\usepackage{xcolor}                             % Farben
+\usepackage{lipsum}
+\usepackage{blindtext}
+\usepackage{biblatex}
+\usepackage{wrapfig}
+\usepackage{texnames}
+\usepackage{subcaption}
+%\usepackage{ccicons} % Creative Commons Icons
+%\usepackage{nameref} % ermöglicht Referenzierung von Abschnittstiteln
+\usepackage[autostyle=true,english=american]{csquotes}
+\usepackage{microtype}
+\usepackage{tabularx}
+\usepackage{relsize}
+\usepackage{ifthen}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.17}
+\usepgfplotslibrary{
+	fillbetween,
+	statistics,
+}
+
+\addbibresource{bib/books.bib}
+\addbibresource{bib/papers.bib}
+\addbibresource{bib/rfcs.bib}
+\addbibresource{bib/websources.bib}
+
+\renewcommand{\bibname}{Literature list}
+
+\allowdisplaybreaks
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+
+\usepackage{esvect}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{multicol}
+\setlength{\columnsep}{1em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% http://html5up.net/read-only
+\definecolor{thillux-green}{HTML}{4ACAA8}
+
+\definecolor{thillux-red}{HTML}{E7746F}
+
+\definecolor{thillux-grey}{HTML}{989898}
+
+\definecolor{thillux-blue}{HTML}{0E94EC}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,decorations}
+
+\newcommand{\colorboxedsec}[2]{
+	\tikz{\node[headings/#1]{#2};}}
+
+\newcommand*{\ie}{i.\,e.,~}
+\newcommand*{\eg}{e.\,g.,~}
+
+\newcommand*{\authors}[1]{\textsc{#1} et\,al.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcounter{anforderung}
+%\newcommand{\anfl}[1]{%
+%	\refstepcounter{anforderung}%
+%	(A\arabic{anforderung})%
+%	\label{anf:#1}%
+%}
+
+\newcounter{assumption}
+\setcounter{assumption}{0}
+\newcounter{nfrequirement}
+\setcounter{nfrequirement}{0}
+\newcounter{frequirement}
+\setcounter{frequirement}{0}
+\newcounter{secrequirement}
+\setcounter{secrequirement}{0}
+
+\newcommand*{\mmid}{\,\middle|\,}
+
+\renewcommand*{\theassumption}{(A\arabic{assumption})}
+\renewcommand*{\thenfrequirement}{(NF\arabic{nfrequirement})}
+\renewcommand*{\thefrequirement}{(F\arabic{frequirement})}
+\renewcommand*{\thesecrequirement}{(S\arabic{secrequirement})}
+
+\newcommand*{\assumptionautorefname}{Assumption}
+\newcommand*{\nfrequirementautorefname}{Requirement}
+\newcommand*{\frequirementautorefname}{Requirement}
+\newcommand*{\secrequirementautorefname}{Requirement}
+
+\newcommand{\assumption}[1]{%
+	\refstepcounter{assumption}%
+	\item[\theassumption] {#1}%
+}
+
+\newcommand{\functionalrequirement}[1]{%
+	\refstepcounter{frequirement}%
+	\item[\thefrequirement] {#1}%
+}
+\newcommand{\nonfunctionalrequirement}[1]{%
+	\refstepcounter{nfrequirement}%
+	\item[\thenfrequirement] {#1}%
+}
+\newcommand{\secrequirement}[1]{%
+	\refstepcounter{secrequirement}%
+	\item[\thesecrequirement] {#1}%
+}
+
+\newenvironment{functionalrequirements}{%
+	\begin{description}%
+}{%
+	\end{description}%
+}
+\newenvironment{nonfunctionalrequirements}{%
+	\begin{description}%
+}{%
+	\end{description}%
+}
+\newenvironment{secrequirements}{%
+	\begin{description}%
+}{%
+	\end{description}%
+}
+
+\usepackage[toc,page]{appendix}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% example boxes
+
+\usetikzlibrary{calc}
+
+\newcommand{\TXExample}[1]{
+	\begin{center}%
+		\begin{tikzpicture}%
+			\node [draw=none, fill=thillux-grey!15, very thick,
+			rectangle, inner sep=10pt, inner ysep=8pt] (box){%
+				\begin{minipage}{0.85\textwidth}%
+					#1%
+				\end{minipage}%
+				};%
+				\draw[line width=0.5ex, thillux-grey] ($(box.south west) + (0,0.6pt)$) |- ($(box.north west) - (0,0.6pt)$);%
+		\end{tikzpicture}%
+	\end{center}%
+}
+
+\newcommand{\TXExampleWithTitle}[2]{
+	\begin{center}%
+		\begin{tikzpicture}%
+			\node [draw=none, fill=thillux-grey!15, very thick,
+			rectangle, inner sep=10pt, inner ysep=8pt] (box){%
+				\begin{minipage}{0.85\textwidth}%
+					\textbf{#1}\\%
+					#2%
+				\end{minipage}%
+				};%
+				\draw[line width=0.5ex, thillux-grey] ($(box.south west) + (0,0.6pt)$) |- ($(box.north west) - (0,0.6pt)$);%
+		\end{tikzpicture}%
+	\end{center}%
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\graphicspath{{img/}}
+\usepackage[font=small, labelfont=bf]{caption}
+% #1 - options for includegraphics (optional)
+% #2 - path to figure
+% #3 - caption
+% #4 - label
+\newcommand{\fig}[4][]{
+	\begin{figure}[!htp]
+		\centering
+		\includegraphics[#1]{#2}
+		\caption{#3}
+		\label{#4}
+	\end{figure}
+}
+
+\newcommand{\figMinipage}[3][]{
+    \begin{minipage}{#3}
+        \centering
+        \includegraphics[#1]{#2}
+    \end{minipage}
+}
+
+\newenvironment{figsMinipage}[2]{%
+    \def\figsCaption{#1}%
+    \def\figsLabel{#2}%
+    \begin{figure}%
+    \centering
+}{%
+    \caption{\figsCaption}%
+    \label{\figsLabel}%
+    \end{figure}%
+}
+
+% figure envs
+\newcommand{\LoadBandFigure}[4][!htp]{
+	\begin{figure}[#1]
+		\centering
+		\includegraphics[width=\columnwidth]{plots/out/load-band-#2.pdf}
+		\caption{#3}
+		\label{#4}
+	\end{figure}
+}
+
+% other stuff
+
+\newcommand*\var[1]{\textit{#1}}
+\newcommand*\class[1]{\texttt{#1}}
+\newcommand*\func[1]{\texttt{#1()}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+%\newcommand*{\theoremautorefname}{Theorem}
+\newcounter{metatestcase}
+\setcounter{metatestcase}{0}
+
+\newcounter{testcase}
+\setcounter{testcase}{0}
+
+\newcounter{subtestcase}[testcase]
+\setcounter{subtestcase}{0}
+
+\newcounter{testcaseresult}
+\setcounter{testcaseresult}{0}
+
+\renewcommand*{\thetestcase}{%
+    \arabic{metatestcase}.\arabic{testcase}%
+}
+\renewcommand*{\thesubtestcase}{%
+    \thetestcase.\arabic{subtestcase}%
+}
+\renewcommand*{\theHtestcase}{%
+    \arabic{metatestcase}.\arabic{testcase}%
+}
+\renewcommand*{\theHsubtestcase}{%
+    \theHtestcase.\arabic{subtestcase}%
+}
+
+\newcommand{\testcaseautorefname}{Testfall}
+\newcommand{\subtestcaseautorefname}{Test}
+
+\newcommand{\MetaTestCase}{%
+    \stepcounter{metatestcase}%
+    \setcounter{testcase}{0}%
+    \setcounter{testcaseresult}{0}%
+}
+\newcommand*{\TestCase}[1]{%
+    \ifnum\value{testcase}>0%
+        \ifnum\value{testcaseresult}=0%
+            \todo{Results TC \thetestcase}%
+        \fi%
+    \fi%
+    \refstepcounter{testcase}%
+    \setcounter{subtestcase}{0}%
+    \setcounter{testcaseresult}{0}%
+    \subsubsection*{Testfall \thetestcase%
+        \ifx#1\relax\else: {#1}\fi%
+    }%
+    \addcontentsline{toc}{subsubsection}{%
+        Testfall \thetestcase: {#1}%
+    }%
+}
+\newcommand{\SubTestCase}[1][\relax]{%
+    \refstepcounter{subtestcase}%
+    \paragraph*{Test \thesubtestcase%
+        \ifx#1\relax\else: {#1}\fi%
+    }%
+}
+
+\newcommand{\FinalizeTestCases}{%
+    \ifnum\value{testcase}>0%
+        \ifnum\value{testcaseresult}=0%
+            \todo{Results TC \thetestcase}%
+        \fi%
+    \fi%
+}
+
+\newcommand{\TestCaseParameter}[2]{\item[#1] {#2}}
+\newcommand{\TestCaseMeasuredSize}[2]{\item[#1] {#2}}
+
+\newenvironment{TestCaseDescription}{%
+    \paragraph*{Beschreibung}%
+}{}
+\newenvironment{TestCaseParameters}{%
+    \paragraph*{Parameter}%
+    \begin{description}%
+}{%
+    \end{description}%
+}
+\newenvironment{TestCaseMeasuredSizes}{%
+    \paragraph*{Messgrößen}%
+    \begin{description}%
+}{%
+    \end{description}%
+}
+\newenvironment{TestCaseExpectation}{%
+    \paragraph*{Erwartungshaltung}%
+}{}
+\newenvironment{TestCaseResult}{%
+    \stepcounter{testcaseresult}%
+    \paragraph*{Auswertung}%
+}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\colorlet{darkgreen}{green!50!black}
+\colorlet{mypurple}{blue!50!red}
+\colorlet{b1r5}{blue}
+\colorlet{b2r5}{blue!75!red}
+\colorlet{b3r5}{blue!50!red}
+\colorlet{b4r5}{blue!25!red}
+\colorlet{b5r5}{red}
+
+\colorlet{b1r8}{red!0!blue}
+\colorlet{b2r8}{red!14!blue}
+\colorlet{b3r8}{red!28!blue}
+\colorlet{b4r8}{red!42!blue}
+\colorlet{b5r8}{red!57!blue}
+\colorlet{b6r8}{red!71!blue}
+\colorlet{b7r8}{red!85!blue}
+\colorlet{b8r8}{red!100!blue}
+
+\pgfplotsset{
+	every boxplot/.style={
+		mark=o,
+		every mark/.append style={
+			mark size=0.8pt,
+		},
+	},
+}
+
+% pgfplots stuff
+\pgfplotscreateplotcyclelist{custom trans3}{
+	blue\\
+	blue!50!red\\
+	red\\
+}
+
+\pgfplotscreateplotcyclelist{custom trans3 fill}{
+	blue,fill=blue!25!white\\
+	blue!50!red,fill=b3r5!25!white\\
+	red,fill=red!25!white\\
+}
+
+\pgfplotscreateplotcyclelist{custom trans5}{
+	blue\\
+	blue!75!red\\
+	blue!50!red\\
+	blue!25!red\\
+	red\\
+}
+
+\pgfplotscreateplotcyclelist{custom trans5 fill}{
+	blue,fill=b1r5!25!white\\
+	blue!75!red,fill=b2r5!25!white\\
+	blue!50!red,fill=b3r5!25!white\\
+	blue!25!red,fill=b4r5!25!white\\
+	red,fill=b5r5!25!white\\
+}
+
+\pgfplotscreateplotcyclelist{custom trans4}{
+	b1r8\\
+	b3r8\\
+	b6r8\\
+	b8r8\\
+}
+
+\pgfplotscreateplotcyclelist{custom trans8}{
+	b1r8\\
+	b2r8\\
+	b3r8\\
+	b4r8\\
+	b5r8\\
+	b6r8\\
+	b7r8\\
+	b8r8\\
+}
+
+\pgfplotscreateplotcyclelist{custom trans8 fill}{
+	b1r8,fill=b1r8!25!white\\
+	b2r8,fill=b2r8!25!white\\
+	b3r8,fill=b3r8!25!white\\
+	b4r8,fill=b4r8!25!white\\
+	b5r8,fill=b5r8!25!white\\
+	b6r8,fill=b6r8!25!white\\
+	b7r8,fill=b7r8!25!white\\
+	b8r8,fill=b8r8!25!white\\
+}
+
+\pgfplotscreateplotcyclelist{custom trans6}{
+	b1r8\\
+	b2r8\\
+	b4r8\\
+	b5r8\\
+	b7r8\\
+	b8r8\\
+}
+
+\pgfplotscreateplotcyclelist{custom trans6 fill}{
+	b1r8,fill=b1r8!25!white\\
+	b2r8,fill=b2r8!25!white\\
+	b4r8,fill=b4r8!25!white\\
+	b5r8,fill=b5r8!25!white\\
+	b7r8,fill=b7r8!25!white\\
+	b8r8,fill=b8r8!25!white\\
+}
+
+\pgfplotscreateplotcyclelist{custom trans8 box}{
+	b1r8,mark=x\\
+	b2r8,mark=x\\
+	b3r8,mark=x\\
+	b4r8,mark=x\\
+	b5r8,mark=x\\
+	b6r8,mark=x\\
+	b7r8,mark=x\\
+	b8r8,mark=x\\
+}
+
+\newcommand*{\BoxplotElfiThroughputTicks}{1, 2, 3}
+\newcommand*{\BoxplotElfiThroughputColumn}{2}
+\newcommand{\BoxplotElfiThroughput}[3][0, 10, 30]{
+	\begin{tikzpicture}
+		\begin{axis}[
+			title={RX Throughput in Mbit/s},
+			xlabel={Insert Probability in \(\%\)},
+			boxplot,
+			boxplot/draw direction=y,
+			xtick={\BoxplotElfiThroughputTicks},
+			xticklabels={#1},
+			scaled ticks=false,
+		]
+			\foreach \i in {#1}{
+				\addplot table[y index=\BoxplotElfiThroughputColumn]{stats/out/throughput-stat/elfi.#2.\i.#3-bps.csv};
+			}
+		\end{axis}
+	\end{tikzpicture}
+	\begin{tikzpicture}
+		\begin{axis}[
+			title={RX Throughput in Packets/s},
+			xlabel={Insert Probability in \(\%\)},
+			boxplot,
+			boxplot/draw direction=y,
+			xtick={\BoxplotElfiThroughputTicks},
+			xticklabels={#1},
+			scaled ticks=false,
+		]
+			\foreach \i in {#1}{
+				\addplot table[y index=\BoxplotElfiThroughputColumn]{stats/out/throughput-stat/elfi.#2.\i.#3-pps.csv};
+			}
+		\end{axis}
+	\end{tikzpicture}
+}
+
+\newcommand{\PlotImbalance}[1]{
+	\begin{tikzpicture}
+		\begin{axis}[
+			xlabel={Time in s},
+			ylabel={Imbalance},
+		]
+			\addplot[blue] table {stats/out/util-stat/#1-rtb-util-imbalance.csv};
+			\addlegendentry{Encryption path}
+			\addplot[red]  table {stats/out/util-stat/#1-btr-util-imbalance.csv};
+			\addlegendentry{Decryption path}
+		\end{axis}
+	\end{tikzpicture}
+}
+
+\newcommand{\PlotBand}[6][blue]{
+	\addplot[#1, name path=L] table[x=#3,y=#5] {#2};
+	\addplot[#1, name path=U, forget plot] table[x=#3,y=#6] {#2};
+	\addplot[#1!25!white, forget plot] fill between [of=L and U];
+
+	\addplot[black, thick] table[x=#3,y=#4] {#2};
+}
+
+\newenvironment{PlotLoadTimeseriesAxis}[1][]{
+	\begin{tikzpicture}
+		\begin{axis}[
+			xlabel={Time [s]},
+			ylabel={\(u\)},
+			width=11cm,
+			height=5cm,
+			ymin=-50,
+			ymax=1050,
+			#1
+		]
+}{
+		\end{axis}
+	\end{tikzpicture}
+}
+
+\newcommand{\PlotLoadTimeseriesAddplots}[3][]{
+	\foreach \i in {#2}{
+		\addplot+[
+			mark=,
+			#1
+		] table [
+			x=elapsed,
+			y=\i
+		] {#3};
+	}
+}
+
+\newenvironment{PlotLoadBandAxis}[1][]{
+	\begin{tikzpicture}
+		\begin{axis}[
+			xlabel={Time [s]},
+			ylabel={Utilization},
+			width=11cm,
+			height=7cm,
+			#1
+		]
+}{
+		\end{axis}
+	\end{tikzpicture}
+}
+
+\newcommand{\PlotLoadBand}[2][blue]{
+	\PlotBand[#1]{#2}{elapsed}{average}{average_minus_stddev}{average_plus_stddev}
+}
+\newcommand{\PlotMinMax}[2][]{
+	\addplot+[
+		dashed,
+		black,
+		mark=,
+		forget plot,
+		#1
+	] table [
+		x=elapsed,
+		y=min,
+	] {#2};
+	\addplot+[
+		dashed,
+		black,
+		mark=,
+		#1
+	] table [
+		x=elapsed,
+		y=max,
+	] {#2};
+}
+
+\newcommand{\PlotFullLoadBand}[1]{
+	\PlotLoadBand{#1}
+	\addlegendentry{\(\overline{u} \pm \sigma_u\)}
+	\addlegendentry{\(\overline{u}\)}
+	\PlotMinMax{#1}
+	\addlegendentry{\(u_{min}\)/\(u_{max}\)}
+}
+
+\newenvironment{PlotLoadBoxAxis}[1][]{
+	\begin{tikzpicture}
+		\begin{axis}[
+			boxplot/draw direction=y,
+			xtick distance=1,
+			xlabel={\(C_{RSS}\)},
+			ylabel={\(\overline{u}\)},
+			extra y tick style={
+				grid=major,
+			},
+			major grid style={
+				dashed,
+			},
+			width=6cm,
+			height=6cm,
+			ymin=-50,
+			ymax=1050,
+			#1
+		]
+}{
+		\end{axis}
+	\end{tikzpicture}
+}
+
+\newcommand{\PlotLoadBox}[2][]{
+	\addplot+[
+		boxplot,
+		#1
+	] table [
+		x=elapsed,
+		y=average,
+	] {#2};
+}
+
+\newcommand{\PlotLoadMaxBox}[2][]{
+	\addplot+[
+		boxplot,
+		#1
+	] table [
+		x=elapsed,
+		y=max,
+	] {#2};
+}
+
+\newenvironment{PlotThroughputAxis}[2][]{
+	\begin{tikzpicture}
+		\begin{axis}[
+			boxplot/draw direction=y,
+			ylabel={%
+				\ifthenelse{\equal{#2}{pps}}{%
+					\(t_p\) [\(Pkt/s\)]%
+				}{%
+					\ifthenelse{\equal{#2}{pps-largest}}{%
+						\(t_{{l}_p}\) [\(Pkt/s\)]%
+					}{%
+						\ifthenelse{\equal{#2}{Mbps-largest}}{%
+							\(t_{l_b}\) [\(Mbit/s\)]%
+						}{%
+							\(t_b\) [\(Mbit/s\)]%
+						}%
+					}%
+				}%
+			},
+			scaled ticks=false,
+			ymin=0,
+			width=7cm,
+			height=5cm,
+			#1
+		]
+		\ifthenelse{\equal{#2}{pps}}{
+			\edef\ba@tpcol{RX-pps}
+		}{
+			\ifthenelse{\equal{#2}{pps-largest}}{
+				\edef\ba@tpcol{RX-pps-first}
+			}{
+				\ifthenelse{\equal{#2}{Mbps-largest}}{
+					\edef\ba@tpcol{RX-Mbps-first}
+				}{
+					\edef\ba@tpcol{RX-Mbps}
+				}
+			}
+		}
+}{
+		\end{axis}
+	\end{tikzpicture}
+}
+
+\newcommand{\PlotThroughputAddplot}[2][]{
+	\addplot+ [
+		boxplot,
+		#1
+	] table [
+		x=run,
+		y=\ba@tpcol,
+	] {#2};
+}
+
+\newenvironment{PlotLatencyAxis}[2][]{
+	\begin{tikzpicture}
+		\begin{axis}[
+			boxplot/draw direction=y,
+			ylabel={\ifthenelse{\equal{#2}{avg}}{\(\overline{l}\)}{\ifthenelse{\equal{#2}{max}}{\(l_{max}\)}{\(l_{min,max}\)}} [\(\mu s\)]},
+			scaled ticks=false,
+			width=7cm,
+			height=5cm,
+			ymin=0,
+			#1
+		]
+}{
+		\end{axis}
+	\end{tikzpicture}
+}
+
+\newcommand{\PlotLatencyAddplotAvg}[2][]{
+	\addplot+ [
+		boxplot,
+		#1
+	] table [
+		x=run,
+		y=Delay-avg,
+	] {#2};
+}
+
+\newcommand{\PlotLatencyAddplotMax}[2][]{
+	\addplot+ [
+		boxplot,
+		#1
+	] table [
+		x=run,
+		y=Delay-max,
+	] {#2};
+}
+
+\newcommand{\PlotLatencyAddplotMinMax}[3][]{
+	\addplot+ [
+		boxplot,
+		boxplot/draw position=#2,
+		#1
+	] table [
+		x=run,
+		y=Delay-min,
+	] {#3};
+	\addplot+ [
+		boxplot,
+		boxplot/draw position=#2,
+		#1
+	] table [
+		x=run,
+		y=Delay-max,
+	] {#3};
+}
+
+%\newcommand{\PlotLoadBandYmin}{-50}
+%\newcommand{\PlotLoadBandYmax}{1050}
+%\newcommand{\PlotLoadBandNode}{l6-rtb}
+
+%\newcommand{\PlotLoadBand}[1]{
+%	\begin{tikzpicture}
+%		\begin{axis}[
+%			xlabel={Time [s]},
+%			ylabel={Load},
+%			ymin=\PlotLoadBandYmin,
+%			ymax=\PlotLoadBandYmax,
+%			title={Average \(\pm \sigma\)},
+%		]
+%			\PlotBand{stats/out/util-stat/#1-\PlotLoadBandNode-util-avg-band.csv}{elapsed}{mean}{lower_band}{upper_band}
+%		\end{axis}
+%	\end{tikzpicture}
+%	\begin{tikzpicture}
+%		\begin{axis}[
+%			xlabel={Time [s]},
+%			ylabel={Load},
+%			ymin=\PlotLoadBandYmin,
+%			ymax=\PlotLoadBandYmax,
+%			title={Median, Quartiles, Minimum and Maximum},
+%		]
+%			\PlotBand[red]{stats/out/util-stat/#1-\PlotLoadBandNode-util-agg-stat.csv}{elapsed}{median}{perc25_0}{perc75_0}
+%			\addplot[dashed, black] table[x=elapsed,y=min] {stats/out/util-stat/#1-\PlotLoadBandNode-util-agg-stat.csv};
+%			\addplot[dashed, black] table[x=elapsed,y=max] {stats/out/util-stat/#1-\PlotLoadBandNode-util-agg-stat.csv};
+%		\end{axis}
+%	\end{tikzpicture}
+%}
+
+\newenvironment{PlotIsolatedFlowsAxis}[1][]{
+	\begin{tikzpicture}
+		\begin{axis}[
+			xlabel={Time [s]},
+			ylabel={Number of isolated flows},
+			xmin=-50,
+			height=5cm,
+			width=13cm,
+			extra x tick style={
+				grid=major,
+				tick label style={
+					anchor=north west,
+					font={\small},
+					yshift=-1.0em,
+				},
+			},
+			#1
+		]
+}{
+		\end{axis}
+	\end{tikzpicture}
+}
+\newenvironment{PlotIsolatedFlowsAxisRelative}[1][]{
+	\begin{tikzpicture}
+		\begin{axis}[
+			xlabel={Time [s]},
+			ylabel={Isolated flows [\%]},
+			xmin=-50,
+			height=5cm,
+			width=13cm,
+			extra x tick style={
+				grid=major,
+				tick label style={
+					anchor=north west,
+					font={\small},
+					yshift=-1.0em,
+				},
+			},
+			legend style={
+				cells={anchor=east},
+				legend pos=north west,
+			},
+			#1
+		]
+}{
+		\end{axis}
+	\end{tikzpicture}
+}
+\newenvironment{PlotIsolatedFlowsBoxAxis}[1][]{
+	\begin{tikzpicture}
+		\begin{axis}[
+			xlabel={Skew [\(\%\)]},
+			xtick={1,2,3,4},
+			xticklabels={0,30,50,90},
+			xtick distance=1,
+			ylabel={\(I\) [1]},
+			bar width=6pt,
+			ybar=1pt,
+			ymin=0,
+			xmin=0.5,
+			xmax=4.5,
+			height=5cm,
+			width=7cm,
+			legend style={
+				legend pos=north west,
+			},
+			#1
+		]
+}{
+		\end{axis}
+	\end{tikzpicture}
+}
+\newenvironment{PlotIsolatedFlowsBoxAxisLargest}[1][]{
+	\begin{tikzpicture}
+		\begin{axis}[
+			xlabel={Skew [\(\%\)]},
+			xtick={1,2,3,4},
+			xticklabels={0,30,50,90},
+			xtick distance=1,
+			ylabel={\(i_{l}\) [\(\%\)]},
+			bar width=6pt,
+			xmin=0.5,
+			xmax=4.5,
+			ybar=1pt,
+			ymin=0,
+			height=5cm,
+			width=7cm,
+			legend style={
+				legend pos=north west,
+			},
+			#1
+		]
+}{
+		\end{axis}
+	\end{tikzpicture}
+}
+\newcommand{\PlotIsolatedFlowsAddplot}[2][]{
+	\addplot+[
+		sharp plot,
+		mark=,
+		#1
+	]
+	table [
+		x=elapsed,
+		y=elfi-isolated,
+	] {#2};
+}
+\newcommand{\PlotIsolatedFlowsAddplotRelative}[2][]{
+	\addplot+[
+		sharp plot,
+		mark=,
+		#1
+	]
+	table [
+		x=elapsed,
+		y=elfi-isolated-percent,
+	] {#2};
+}
+\newcommand{\PlotIsolatedFlowsAddplotBox}[2][]{
+	\addplot+[
+		ybar,
+		mark=,
+		#1
+	] table [
+		x=run,
+		y=elfi-isolated-avg,
+	]{#2};
+}
+\newcommand{\PlotIsolatedFlowsAddplotBoxLargest}[2][]{
+	\addplot+[
+		ybar,
+		mark=,
+		#1
+	] table [
+		x=run,
+		y=elfi-isolated-first-percent,
+	]{#2};
+}
+
+\newenvironment{PlotIsolatedThroughputAxis}[1][\relax]{
+	\begin{tikzpicture}
+		\begin{axis}[
+			xtick={1,2,3,4},
+			xticklabels={0,30,50,90},
+			xlabel={Skew [\(\%\)]},
+			ylabel={Isolated Throughput [\(Pkt/s\)]},
+			bar width=6pt,
+			ybar=1pt,
+			width=7cm,
+			height=5cm,
+			ymin=0,
+			#1
+		]
+}{
+		\end{axis}
+	\end{tikzpicture}
+}
+
+\newcommand{\PlotIsolatedThroughputAddplot}[2][]{
+	\addplot+[
+		ybar,
+		#1
+	] table [
+		x={run},
+		y={elfi-isolated-pps},
+	] {#2};
+}
+
+\newcommand{\PlotIsolatedFlows}[1]{
+	\begin{PlotIsolatedFlowsAxis}
+		\PlotIsolatedFlowsAddplot{#1}
+	\end{PlotIsolatedFlowsAxis}
+}
+
+\makeatother
+
+\usepackage[acronym]{glossaries}
+\makeglossaries
+\renewcommand{\glossarysection}[2][]{}
+\usepackage{pifont}
+\newcommand{\uncheckmark}{\ding{55}}
+\newcommand{\unchecked}{---}
+
+\newcommand{\req}[2] {%
+\parbox[t]{\linewidth}{% 
+\makebox[3.5em][l]{#1}%
+ \parbox[t]{\dimexpr\linewidth-3.5em\relax}{#2}% 
+ }% 
+ }
+
+ \usepackage{rotating}

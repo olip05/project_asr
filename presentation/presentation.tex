@@ -1,0 +1,138 @@
+% Unterstützte Seitenverhältnisse: 43, 169, 1610
+\documentclass[aspectratio=169]{beamer}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{biblatex}
+\usepackage{csquotes}
+\usepackage{tabularx}	
+\usepackage{booktabs}	
+\usepackage{pifont}
+\usepackage{tikz}
+\usepackage{presentation/template/beamerthemeTUIl}
+\addbibresource{bib/papers.bib}
+\addbibresource{bib/websources.bib}
+\addbibresource{bib/books.bib}
+\addbibresource{bib/rfcs.bib}
+
+\def\withNotes{withNotes}
+\ifx\dynmode\withNotes
+	\setbeameroption{show notes on second screen=right}
+\fi
+
+\title{Ghibberish Esperanto ASR}
+\subtitle{Speech Recognition (ELEC E5510), 2026}
+\author{Noor van Keulen, Leni Amoriaux, Oliver Plew}
+\institute{Aalto University}
+
+% FIXME oplew update pictures to the correct university 
+\def\titleimage{presentation/images/humbold.jpg}
+\def\lastimage{presentation/images/campus.jpg}
+\def\titlesize{15}
+\def\footercontent{\begin{tabular}{c|c|c}
+	\insertsection & \insertauthor & \today
+\end{tabular}}
+
+\newcommand{\fig}[3][]{
+	\begin{figure}[!htp]
+		\centering
+		\includegraphics[#1]{#2}
+		\caption{#3}
+	\end{figure}
+}
+
+\newcommand{\compactlist}{
+	\setlength{\itemsep}{1pt}
+	\setlength{\parskip}{0pt}
+	\setlength{\parsep}{0pt}
+}
+
+% Endzeit auf Notizfolien einfügen
+\newcounter{accumsec} % akkumulierte Zeit in Sekunden
+\setcounter{accumsec}{0}
+% Zeit hinzufügen (in Sekunden)
+\newcommand{\addseconds}[1]{%
+  \addtocounter{accumsec}{#1}%
+}
+% Sekunden in mm:ss umwandeln
+\newcommand{\secstommss}[1]{%
+  \begingroup
+  \count0=#1\relax
+  \count1=\count0
+  \divide\count1 by 60 % Minuten
+  \count2=\count0
+  \advance\count2 by -\numexpr\count1*60\relax % Sekunden
+  \ifnum\count2<10  % führende Null
+    \edef\result{\the\count1:0\the\count2}%
+  \else
+    \edef\result{\the\count1:\the\count2}%
+  \fi
+  \result
+  \endgroup
+}
+% zeigt Zeit für Overlay und akkumulierte Gesamtzeit auf Notizseiten an 
+\newcommand{\notetime}{}
+\newcommand{\setnotetime}[1]{\renewcommand{\notetime}{#1}}
+\setbeamertemplate{note page}{
+  \vbox to \textheight{
+    \insertnote
+    \vfill
+    \hbox to \linewidth{
+      \hfill
+      \color{red}{%
+        \ifx\notetime\@empty
+        \else
+			\Large\notetime\;/\;\secstommss{\value{accumsec}}        
+		\fi
+      }
+    }
+  }
+}
+% bekommt Sekunden für spezielle Overlay
+\newcommand<>{\timednote}[2]{%
+  \note#3{%
+    \setnotetime{{\secstommss{#1}}}%
+    #2%
+	\addseconds{#1}%
+  }%
+}
+
+\begin{document}
+	\section{Introduction}
+
+	\addseconds{15}
+	\titleframe
+
+	\section{Main part}
+
+	\frame{
+		\frametitle{Dummy}
+
+		\begin{itemize} 
+			\item this is the way to make notes on the slide
+		\end{itemize}
+
+		\timednote{60}{
+			\begin{itemize}
+				\item here notes for the presentation can be inserted
+			\end{itemize}
+		}
+	}
+
+	\section{Final}
+	
+	\frame{
+		\frametitle{ }
+
+		\centering\Huge Questions?
+	}
+
+	\begin{frame}[allowframebreaks]
+		\frametitle{Sources}
+		\printbibliography
+	\end{frame}
+
+	\lastframe	{Thank you for your attention!}
+				{Ghibberish Esperanto ASR}
+				{}
+
+\end{document}

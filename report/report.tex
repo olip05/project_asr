@@ -1,0 +1,80 @@
+\RequirePackage[l2tabu, orthodox]{nag}
+
+\documentclass[%
+  paper=a4,
+  fontsize=11pt,
+  pagesize,
+  headings=small,
+  twoside=false,
+  bibliography=totocnumbered,
+  index=totoc,
+  listof=numbered,
+  chapterprefix,
+  numbers=noenddot,
+  version=first,
+  usegeometry=true,
+  BCOR=5mm
+]{scrreprt}
+
+\usepackage[margin=3cm]{geometry}
+
+\usepackage{ifluatex}
+
+\usepackage[english,%
+	colorinlistoftodos,%
+	% disable,
+	shadow,%
+	color=thillux-grey!35,%
+	bordercolor=thillux-grey,%
+	linecolor=thillux-grey%
+]{todonotes}
+
+\ifluatex
+  \usepackage{luacode}
+  \usepackage{fontspec}
+  \defaultfontfeatures{Ligatures=Common}
+  \setmainfont{Source Serif Pro}
+  \setmonofont[Scale=MatchLowercase]{Source Code Pro}
+  \setsansfont[Scale=MatchLowercase]{Source Sans Pro}
+  \usepackage{amsmath}
+  \usepackage{amssymb}
+  \usepackage{unicode-math}
+  \setmathfont[Ligatures=TeX]{Latin Modern Math}
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{lmodern}
+  \usepackage{amsmath}
+  \usepackage{amssymb}
+\fi
+
+% Definition von Autor, Schlagworten etc.
+\input{report/settings/thesisInfo}
+% Pakete und Optionen
+\input{report/settings/preambel}
+
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+
+\begin{document}
+  \pagenumbering{roman}
+  \setcounter{page}{0}
+  \input{report/chapters/titelseite}
+  \input{report/chapters/00-abstract}
+  \newpage
+  \tableofcontents
+
+  % FIXME oplew update structure
+  \pagenumbering{arabic}
+  \input{report/chapters/01-einleitung}
+  \input{report/chapters/02-grundlagen}
+  \input{report/chapters/03-anforderungen}
+  \input{report/chapters/04-konzept}
+  \input{report/chapters/05-evaluierung}
+  \input{report/chapters/06-zusammenfassungUndAusblick}
+
+  \appendix
+  \listoffigures
+  \listoftables
+  \printbibliography
+\end{document}
