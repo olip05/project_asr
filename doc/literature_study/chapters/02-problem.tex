@@ -1,2 +1,30 @@
 \chapter{Problem description}
 \label{problem}
+Speech itself is a complex and continuous valued analogue signal, so that processing in digitalized form is non-trivial and requires multiple (pre-)processing steps.
+Typically the majority of these steps are performed using either mathematical or neural network models, that are learned based on some kind of training data in a supervised manner.
+
+The process of producing and labeling high quality datasets is time- and cost-intensive. 
+Usually it is therefore impossible to create and train a completely optimized model for a given taks and rather already existing general systems are used and only fine-tuned for specified solutions.
+
+This is also the case for this project, because the dataset contains only 6000 training samples with around 10.5 hours of speech. 
+Nowadays such models typically have several hundred million to a few billion parameter and require 1000 to 10000 hours of transcribed speech to achieve good results.
+On the other hand 10 to 100 hours can be enough to adapt respectively fine-tune it to a new language, because most of the needed feature and mapping functionalities stay the same.
+% FIXME oplew source https://humynlabs.ai/blog/speech-recognition-training-data-requirements-best-practices#how-much-data-do-you-need 
+
+The advantage of Esperanto in this case is the history of the language itself.
+Many words are similar to western european languages like french, english, german and latin.
+Others parts are heavily influenced by slawic langugaes like russian and polnish, because of the roots of the inventor.
+So a big part if the sounds and their according transcriptions can be assumed to be quiet similar to these languages, for which a lot of training data is publicely available.
+Most of the commercial and popular open-source models should therefore be already good in transcribing the basics of Esperanto. 
+
+Additionally, the grammatical rules and orthography of Esperanto are by purpose relatively simple.
+Back then one design goal was to keep it simple to learn and resulted in a language which is phonematic, meaning that it has a bijective matching between phonemes and symbols, made out of latin symbols with additional diacritic extensions.
+
+Particullary these special symbols can be a problem for the models because they are not part of the original training data. 
+Also the very limited training data should not be iterated to often to prevent overfitting of the models, what would reduce the quality again.
+
+Speech recognition itself is complicated not only because of the variety of languages, but also because of the quality of the recorded audio. 
+Normal usage scenarios for speech recognition systems barely include a perfectly controlled, quiet environment with high quality recordings but rather multiple speakers, a wide variety of background noises and low-quality recoring devices.
+So a fully functioning ASR system must include preporcessing steps to miniimize such effects. 
+This can be done deterministically with classical signal processing techniques or again with end-to-end systems (neural networks).
+Achieving a sufficient performance in arbitrary environments therefore requires even more data samples to cover as much of these additional effects as possible.
