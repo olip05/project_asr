@@ -49,9 +49,9 @@
 \fi
 
 % Definition von Autor, Schlagworten etc.
-\input{report/settings/thesisInfo}
+\input{doc/report/settings/thesisInfo}
 % Pakete und Optionen
-\input{report/settings/preambel}
+\input{doc/report/settings/preambel}
 
 \setcounter{tocdepth}{3}
 \setcounter{secnumdepth}{3}
@@ -59,19 +59,19 @@
 \begin{document}
   \pagenumbering{roman}
   \setcounter{page}{0}
-  \input{report/chapters/titelseite}
-  \input{report/chapters/00-abstract}
+  \input{doc/report/chapters/titelseite}
+  \input{doc/report/chapters/00-abstract}
   \newpage
   \tableofcontents
 
   % FIXME oplew update structure
   \pagenumbering{arabic}
-  \input{report/chapters/01-einleitung}
-  \input{report/chapters/02-grundlagen}
-  \input{report/chapters/03-anforderungen}
-  \input{report/chapters/04-konzept}
-  \input{report/chapters/05-evaluierung}
-  \input{report/chapters/06-zusammenfassungUndAusblick}
+  \input{doc/report/chapters/01-einleitung}
+  \input{doc/report/chapters/02-grundlagen}
+  \input{doc/report/chapters/03-anforderungen}
+  \input{doc/report/chapters/04-konzept}
+  \input{doc/report/chapters/05-evaluierung}
+  \input{doc/report/chapters/06-zusammenfassungUndAusblick}
 
   \appendix
   \listoffigures
