@@ -3,20 +3,38 @@
 As explained before Automatic Speech Recognition (ASR), the transcription of spoken words to their textual representation, is an important task for many modern applications, like voice assistants or other speech interfaces.
 Therefore lot of solutions and different approaches have been developed througout the years, a few of which were already mentioned in \autoref{intro}, since the idea gained more attention in the 1950s.
 
+\section{Early years}
 The very first systems started using a deterministic modelling of distinct phonemes or formant patterns to distinguish a relatively small set of unique reference speech signals.
 Their main focus layed on digits, math operations and single letters, like \textit{Audrey} by Bell Laboratories \cite{moskvitch2017machines} or \textit{IBM Shoebox} \cite{ibmhistory}.
 This type of systems stayed popular for a long time and was promoted by some influencial players like IBM and the Bell Laboratories, who aimed for comercial use cases in office correspondence and simple voice command controls.
+All of these sysfems were tailored to a single or only a few speakers to achieve a high recognition reliability for the encoded speech features \cite{joy2025approaches} and therefore difficult to implement in a reusable manner. 
 Despite the limited capabilities of these first systems, they were considered as a breakthrough in human-machine interaction \cite{ibmhistory}.
 
-Throughout the 1970s there were improvements in recognizing limited vocabularies and especially single words, but the next important step was caused by the shift of focus to statistical modelling of continuous speech inputs using Hidden Marcov Models (HMMs), which became popular in the 1980s \cite{kincaid2018history}.
+\section{Classical approaches}
+Throughout the 1970s there were improvements in recognizing limited vocabularies and especially single words, but the next important step was caused by the shift of focus to statistical modelling of continuous speech inputs using pattern recognition systems like Hidden Marcov Models (HMMs), which became popular in the 1980s \cite{kincaid2018history}.
 These HMM-based systems were the first that had a real benefit for speaker-unspecific recognition use cases and could work with a relatively large vocabulary.
-% input here some explanation of HMMs
+% input here some explanation of HMMs (pattern learning, alignment creation and interference using decison rules) with cited paper 
 
+\paragraph{HybridHMM-GMM}
+
+
+\section{Modern developments}
 In recent years the rise of huge artifical neural networks and the availability of tremendous amounts of computation resources and training data also influenced the further development of speech recognition systems.
 Research focus lays more and more on so called end-to-end systems, which map the input data directly to an according word sequence instead of using multiple chained modules to model different steps of the processing \cite{history}.
+In contrast to classical approaches these models include multiple sources of knowledge like language models and acoustic models in a single interference step, resulting in so called hybrid models.
+Furthermore they can learn not only the representations and mappings from the training data but also the importance of context infromation \cite{joy2025approaches}. 
 Nowadays, many different architectures and design primitives in this direction were developed and some of them will be explained in the following paragraphs.
 % here a few popular types with short paragraphs
 
+\paragraph{Connectionist Temporal Classifier CTC}
+
+\paragraph{Recurrent Neural Network Transducer RNN-T}
+
+\paragraph{Attention-Based Encoder-Decoder AED}
+
+\paragraph{Foundation Speech Models}
+
+\section{Conclusion}
 In conclusion,
 % at the end a short summary about which apporaches look the most promising
 
@@ -25,3 +43,4 @@ In conclusion,
 % https://lamarr-institute.org/blog/fine-tuning-asr-models/
 % https://arxiv.org/html/2407.06800v1
 % https://huggingface.co/blog/nvidia/fine-tuning-nemotron-35-asr
+% https://github.com/gail-yxie/awesome-asr
