@@ -1,9 +1,24 @@
 \chapter{Solution approaches}
 \label{solution}
-As mentioned before the most promising approach is applying fine tuning respectively transfer learning on an already existing neural network for speech recognition.
-Also the very limited training data should not be iterated to often to prevent overfitting of the models, what would reduce the quality again.
+As explained before Automatic Speech Recognition (ASR), the transcription of spoken words to their textual representation, is an important task for many modern applications, like voice assistants or other speech interfaces.
+Therefore lot of solutions and different approaches have been developed througout the years, a few of which were already mentioned in \autoref{intro}, since the idea gained more attention in the 1950s.
 
-Besides that there are several other approaches ranging from ??? to ???.
+The very first systems started using a deterministic modelling of distinct phonemes or formant patterns to distinguish a relatively small set of unique reference speech signals.
+Their main focus layed on digits, math operations and single letters, like \textit{Audrey} by Bell Laboratories \cite{moskvitch2017machines} or \textit{IBM Shoebox} \cite{ibmhistory}.
+This type of systems stayed popular for a long time and was promoted by some influencial players like IBM and the Bell Laboratories, who aimed for comercial use cases in office correspondence and simple voice command controls.
+Despite the limited capabilities of these first systems, they were considered as a breakthrough in human-machine interaction \cite{ibmhistory}.
+
+Throughout the 1970s there were improvements in recognizing limited vocabularies and especially single words, but the next important step was caused by the shift of focus to statistical modelling of continuous speech inputs using Hidden Marcov Models (HMMs), which became popular in the 1980s \cite{kincaid2018history}.
+These HMM-based systems were the first that had a real benefit for speaker-unspecific recognition use cases and could work with a relatively large vocabulary.
+% input here some explanation of HMMs
+
+In recent years the rise of huge artifical neural networks and the availability of tremendous amounts of computation resources and training data also influenced the further development of speech recognition systems.
+Research focus lays more and more on so called end-to-end systems, which map the input data directly to an according word sequence instead of using multiple chained modules to model different steps of the processing \cite{history}.
+Nowadays, many different architectures and design primitives in this direction were developed and some of them will be explained in the following paragraphs.
+% here a few popular types with short paragraphs
+
+In conclusion,
+% at the end a short summary about which apporaches look the most promising
 
 % https://huggingface.co/learn/audio-course/chapter5/asr_models
 % https://arxiv.org/html/2409.12476v1
