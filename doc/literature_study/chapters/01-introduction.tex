@@ -1,0 +1,53 @@
+\chapter{Introduction}
+\label{intro}
+\section{Topic}
+\label{topic}
+This project is part of the course Speech Recognition (ELEC-E5150) of the year 2026 at Aalto University and was chosen based on the competition description provided by the lecturer.
+
+The aim of this project is the development of a speech recognition system for a ghibberish version of Esperanto based on the provided dataset.
+Throughout the remainings of this project we will develop an automated system to transcribe Esperanto to its textual representation.
+The used dataset contains artificially produced speech samples without any inherent meaning and is part of the publicly available Common Voice Corpus. 
+
+Esperanto is a planned language that was invented by the polish doctor Ludwik Lejzer Zamenhof at the end of the 19th century to serve as a simple unified language for international communication.
+In recent years it became obvious that Esperanto failed its purpose to serve as a \textit{world language} due to the rise and acceptance of english for nearly all international interactions.
+However, there are still Esperanto speakers on every continent nowadays.
+To enable as many people as possible to learn it easily, it was especially designed to have only very few grammatical rules without any exceptions and relies on a strong and fixed coupling between the written and spoken langage, what could make it better applicable for the aimed task.
+
+\section{Problem analysis}
+\label{problem}
+Speech itself is a complex, continuous valued analogue signal and the most common and natural way to communicate and transmit information between human beings.
+Therefore, to enable direct interaction with machines and other non-human systems via speech signals can be highly beneficial for accessability and ubiquituous applications that adress a wide user range.
+
+On the other hand the nature of speech signals also poses difficulties, because conversion and processing in digitalized form is non-trivial and requires multiple (pre-)processing steps.
+Typically the majority of these steps are performed using either deterministic mathematical models or neural networks, that are learned based on some kind of training data in a supervised manner.
+This causes another issue, because the process of producing and labeling high quality datasets is time- and cost-intensive.
+Therefore, it is usually impossible to create and train a fully optimized model for every new task.
+Exactly this problem arises for example with relatively unknown or not heavily used languages. 
+
+Rather than working through all development steps, often already existing more general systems are used and fine-tuned for a specific specialized task.
+This is also the case for this project, because the provided dataset contains only 6000 training samples with around 10.5 hours of speech, which is not sufficient to train a high quality system with sufficient performance.
+Additionally, the available resources especially in case of processing capacity and hardware are very limited, which leads to the next problem. 
+Nowadays speech recognition models typically have between several hundred million to a few billion parameters and require datsets of 1000 to 10'000 hours of transcribed speech and weeks of training runs on dedicated hardware to achieve good results.
+On the other hand 10 to 100 hours can be enough to adapt respectively fine-tune existing options to a new language or other tasks, because most of the needed feature and mapping functionalities can be already generalized properly \cite{choudhary2026speech}.
+
+The advantage of using Esperanto in this case is the history of the language itself.
+As mentioned before it was artificially made and therefore heavily relies on known patterns.
+Many words are similar to or derived from western european languages like french, english, german and latin.
+Other parts are heavily influenced by slawic langugaes like russian and polnish, because of the polish roots of the inventor.
+A big part of the phonemes and their according transcriptions can because of this be assumed to be quiet similar to forementioned languages, for which a lot of training data is already publicly available.
+Most commercial and popular open-source models are trained with a lot of data from these domains and should therefore be already able to transcribe the basics of Esperanto. 
+
+Additionally, the grammatical and orthographical rules of Esperanto are by purpose kept very simple.
+Back then one major design goal was to make it easy to learn, what resulted in a language which is phonematic, meaning that it has a bijective mapping between phonemes and symbols.
+To have a sufficient variety of phonemes avilable these symbols consitst out of latin symbols but are appended with additional diacritic extensions.
+Particulary these special symbols could pose a problem to the models because they were not part of the original training data. 
+
+
+Furthermore, speech recognition itself is a demanding task not only because of the variety of languages, but also because of the required quality of the recorded audio.
+Normal usage scenarios for speech recognition systems barely include a perfectly controlled, quiet environment with high quality recording but rather different speakers, a wide variety of background noises and low-quality recording devices.
+So a fully functioning speech recognition system must also include preprocessing steps to minimize such effects. 
+This can either be done deterministically with classical signal processing techniques or once again with end-to-end systems based on neural networks.
+Achieving a sufficient performance in arbitrary environments therefore requires even more data samples to cover as much of these additional effects as possible.
+
+So in total the design of a speech recognition system is a task that includes a lot of steps and possible difficulties that have to be encountered.
+Some possible solutions and their tradeoffs will be discussed in the following \autoref{solution}.
